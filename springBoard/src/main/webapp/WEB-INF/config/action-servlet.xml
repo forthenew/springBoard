@@ -13,30 +13,32 @@
          <context:component-scan
             base-package="org.springframework.samples.service"/>  -->
 	<context:component-scan base-package="com.forthenew.springBoard"></context:component-scan>
-	<mvc:annotation-driven />
-    <mvc:interceptors>
-        <mvc:interceptor>
-            <mvc:mapping path="/**"/>
-            <bean id="loggerInterceptor" class="com.forthenew.springBoard.common.logger.LoggerInterceptor"></bean>
-        </mvc:interceptor>
-    </mvc:interceptors>
+	<mvc:annotation-driven>
+		<mvc:argument-resolvers>
+			<bean class="com.forthenew.springBoard.common.resolver.CustomMapArgumentResolver"></bean>
+		</mvc:argument-resolvers>
+	</mvc:annotation-driven>
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<bean id="loggerInterceptor" class="com.forthenew.springBoard.common.logger.LoggerInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
      
     <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>
-     
     <bean class="org.springframework.web.servlet.view.BeanNameViewResolver" p:order="0" />
     <!-- 
     <bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />    
      -->
-    <!-- 
     <bean
         class="org.springframework.web.servlet.view.UrlBasedViewResolver" p:order="1"
         p:viewClass="org.springframework.web.servlet.view.JstlView"
         p:prefix="/WEB-INF/jsp/" p:suffix=".jsp">
     </bean>
-     -->
+    <!-- 
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<!-- Example: a logical view name of 'showMessage' is mapped to '/WEB-INF/jsp/showMessage.jsp' -->
-		<property name="prefix" value="/WEB-INF/view/"/>
+		<property name="prefix" value="/WEB-INF/jsp/"/>
 		<property name="suffix" value=".jsp"/>
 	</bean> 
+     -->
 </beans>
