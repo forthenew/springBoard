@@ -1,5 +1,6 @@
 package com.forthenew.springBoard.sample.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -41,7 +42,14 @@ public class SampleServiceImpl implements SampleService {
 	@Override
 	public Map<String, Object> selectBoardDetail(Map<String, Object> map) throws Exception {
 	    sampleDao.updateHitCnt(map);
-	    Map<String, Object> resultMap = sampleDao.selectBoardDetail(map);
+	    Map<String, Object> resultMap = new HashMap<String,Object>();
+	    
+	    Map<String, Object> tempMap = 	sampleDao.selectBoardDetail(map);
+	    resultMap.put("map", tempMap);
+	    
+	    List<Map<String, Object>> list = sampleDao.selectFileList(map);
+	    resultMap.put("list", list);
+	    
 	    return resultMap;
 	}
 	
