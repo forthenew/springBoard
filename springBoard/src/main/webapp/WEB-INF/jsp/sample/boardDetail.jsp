@@ -52,44 +52,42 @@
     <a href="#this" class="btn" id="list">목록으로</a>
     <a href="#this" class="btn" id="update">수정하기</a>
      
-    <%@ include file="/WEB-INF/include/include-body.jspf" %>
-    <script type="text/javascript">
-        $(document).ready(function(){
-            $("#list").on("click", function(e){ //목록으로 버튼
-                e.preventDefault();
-                fn_openBoardList();
-            });
-             
-            $("#update").on("click", function(e){ //수정하기 버튼
-                e.preventDefault();
-                fn_openBoardUpdate();
-            });
-             
-            $("a[name='file']").on("click", function(e){ //파일 이름
-                e.preventDefault();
-                fn_downloadFile($(this));
-            });
-        });
-         
-		function fn_openBoardList(){
-			var comSubmit = new ComSubmit();
-			comSubmit.setUrl("<c:url value='/sample/openBoardList.do' />");
-			comSubmit.submit();
-        }
-		function fn_openBoardUpdate(){
-			var idx = "${map.IDX}";
-			var comSubmit = new ComSubmit();
-			comSubmit.setUrl("<c:url value='/sample/openBoardUpdate.do' />");
-			comSubmit.addParam("IDX", idx);
-			comSubmit.submit();
-        }
-		function fn_downloadFile(obj){
-			var idx = obj.parent().find("#IDX").val();
-			var comSubmit = new ComSubmit();
-			comSubmit.setUrl("<c:url value='/common/downloadFile.do' />");
-			comSubmit.addParam("IDX", idx);
-			comSubmit.submit();
-        }
-    </script>
+	<%@ include file="/WEB-INF/include/include-body.jspf" %>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$("#list").on("click", function(e){ //목록으로 버튼
+			e.preventDefault();
+			fn_openBoardList();
+		});
+		$("#update").on("click", function(e){ //수정하기 버튼
+			e.preventDefault();
+			fn_openBoardUpdate();
+		});
+		$("a[name='file']").on("click", function(e){ //파일 이름
+			e.preventDefault();
+			fn_downloadFile($(this));
+		});
+	});
+
+	function fn_openBoardList(){
+		var comSubmit = new ComSubmit();
+		comSubmit.setUrl("<c:url value='/sample/openBoardList.do' />");
+		comSubmit.submit();
+	}
+	function fn_openBoardUpdate(){
+		var idx = "${map.IDX}";
+		var comSubmit = new ComSubmit();
+		comSubmit.setUrl("<c:url value='/sample/openBoardUpdate.do' />");
+		comSubmit.addParam("IDX", idx);
+		comSubmit.submit();
+	}
+	function fn_downloadFile(obj){
+		var idx = obj.parent().find("#IDX").val();
+		var comSubmit = new ComSubmit();
+		comSubmit.setUrl("<c:url value='/common/downloadFile.do' />");
+		comSubmit.addParam("IDX", idx);
+		comSubmit.submit();
+	}
+	</script>
 </body>
 </html>

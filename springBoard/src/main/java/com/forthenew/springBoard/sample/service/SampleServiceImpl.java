@@ -54,8 +54,22 @@ public class SampleServiceImpl implements SampleService {
 	}
 	
 	@Override
-	public void updateBoard(Map<String, Object> map) throws Exception{
-	    sampleDao.updateBoard(map);
+	public void updateBoard(Map<String, Object> map, HttpServletRequest request) throws Exception{
+		sampleDao.updateBoard(map);
+	    
+		sampleDao.deleteFileList(map);
+		List<Map<String, Object>> list = fileUtils.parseUpdateFileInfo(map, request);
+		Map<String, Object> tempMap = null;
+		for( int i = 0; i < list.size(); i++) {
+			tempMap = list.get(i);
+			if( tempMap.get("IS_NEW").equals("Y")) {
+				sampleDao.insertFile(tempMap);
+			}
+			else
+			{
+				sampleDao.updateFile(tempMap);
+			}
+		}
 	}
 	
 	@Override

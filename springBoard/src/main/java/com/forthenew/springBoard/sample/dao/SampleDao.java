@@ -12,4 +12,6 @@ public interface SampleDao {
 	void deleteBoard(Map<String, Object> map) throws Exception;
 	void insertFile(Map<String, Object> map) throws Exception;
 	List<Map<String, Object>> selectFileList(Map<String, Object> map) throws Exception;
+	void deleteFileList(Map<String, Object> map) throws Exception;
+	void updateFile(Map<String, Object> map) throws Exception;
 }
