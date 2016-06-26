@@ -4,18 +4,22 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.forthenew.springBoard.common.util.FileUtils;
 import com.forthenew.springBoard.sample.dao.SampleDao;
 
 @Service("sampleService")
 public class SampleServiceImpl implements SampleService {
-
 	Logger log = LoggerFactory.getLogger(this.getClass());
     
+	@Resource(name="fileUtils")
+    private FileUtils fileUtils;
+	
     @Resource(name="sampleDao")
     private SampleDao sampleDao;
     
@@ -23,10 +27,15 @@ public class SampleServiceImpl implements SampleService {
 	public List<Map<String, Object>> selectBoardList(Map<String, Object> map) throws Exception {
 		return sampleDao.selectBoardList(map);
 	}
-
+	
 	@Override
-	public void insertBoard(Map<String, Object> map) throws Exception {
-	    sampleDao.insertBoard(map);
+	public void insertBoard(Map<String, Object> map, HttpServletRequest request) throws Exception {
+		sampleDao.insertBoard(map);
+		
+		List<Map<String,Object>> list = fileUtils.parseInsertFileInfo(map, request);
+        for(int i = 0; i < list.size(); i++) {
+            sampleDao.insertFile(list.get(i));
+        }
 	}
 	
 	@Override

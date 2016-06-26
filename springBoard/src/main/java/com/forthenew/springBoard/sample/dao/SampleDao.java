@@ -10,4 +10,5 @@ public interface SampleDao {
 	Map<String, Object> selectBoardDetail(Map<String, Object> map) throws Exception;
 	void updateBoard(Map<String, Object> map) throws Exception;
 	void deleteBoard(Map<String, Object> map) throws Exception;
+	void insertFile(Map<String, Object> map) throws Exception;
 }

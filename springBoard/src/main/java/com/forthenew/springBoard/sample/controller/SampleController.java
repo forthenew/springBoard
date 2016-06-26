@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,10 +57,10 @@ public class SampleController {
 	}
 
 	@RequestMapping(value="/sample/insertBoard.do")
-	public ModelAndView insertBoard(CommandMap commandMap) throws Exception {
+	public ModelAndView insertBoard(CommandMap commandMap, HttpServletRequest request) throws Exception {
 	    ModelAndView mv = new ModelAndView("redirect:/sample/openBoardList.do");
 	     
-	    sampleService.insertBoard(commandMap.getMap());
+	    sampleService.insertBoard(commandMap.getMap(), request);
 	     
 	    return mv;
 	}

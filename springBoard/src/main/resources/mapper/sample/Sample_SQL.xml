@@ -11,10 +11,10 @@
         ]]>
 	</select>
 
-	<insert id="insertBoard" parameterType="hashmap">
+	<insert id="insertBoard" parameterType="hashmap" useGeneratedKeys="true" keyProperty="IDX">
     <![CDATA[
-        INSERT INTO TB_BOARD ( TITLE, CONTENTS, HIT_CNT, DEL_GB, CREA_ID)
-        VALUES ( #{TITLE}, #{CONTENTS}, 0, 'N', 'Admin' )
+        INSERT INTO TB_BOARD (IDX, TITLE, CONTENTS, HIT_CNT, DEL_GB, CREA_ID)
+        VALUES (#{IDX}, #{TITLE}, #{CONTENTS}, 0, 'N', 'Admin' )
     ]]>
 	</insert>
 	
@@ -42,4 +42,11 @@
         UPDATE TB_BOARD SET DEL_GB = 'Y' WHERE IDX = #{IDX}
     ]]>
 	</update>
+	
+	<insert id="insertFile" parameterType="hashmap">
+    <![CDATA[
+        INSERT INTO TB_FILE(BOARD_IDX, ORIGINAL_FILE_NAME, STORED_FILE_NAME, FILE_SIZE, CREA_ID)
+        VALUES( #{BOARD_IDX}, #{ORIGINAL_FILE_NAME}, #{STORED_FILE_NAME}, #{FILE_SIZE}, 'Admin')
+    ]]>
+    </insert>
 </mapper>
