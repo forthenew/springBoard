@@ -23,6 +23,21 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
     	<url-pattern>*.do</url-pattern>
     </filter-mapping>
     
+    <filter>
+    	<filter-name>RequestLoggingFilter</filter-name> <!-- mandatory -->
+    	<filter-class>com.forthenew.servlet.filters.RequestLoggingFilter</filter-class> <!-- mandatory -->
+    	<init-param> <!-- optional -->
+    		<param-name>test</param-name>
+    		<param-value>testValue</param-value>
+    	</init-param>
+    </filter>
+    <filter-mapping>
+    	<filter-name>RequestLoggingFilter</filter-name> <!-- mandatory -->
+    	<url-pattern>/*</url-pattern> <!-- either url-pattern or servlet-name is mandatory -->
+    	<servlet-name>LoginServlet</servlet-name>
+    	<dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
+    
    <!--
 		- Location of the XML file that defines the root application context.
 		- Applied by ContextLoaderListener.
